@@ -1,0 +1,120 @@
+/* ==========================================================================
+   LifeOS Responsive Design
+   Dedicated mobile & tablet layout patterns
+   ========================================================================== */
+
+/* Mobile Navigation Backdrop */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(2px);
+  z-index: 35;
+}
+
+@media (max-width: 1024px) {
+  .app-sidebar {
+    position: fixed;
+    left: -260px;
+    top: 0;
+    bottom: 0;
+    z-index: 50;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .app-sidebar.mobile-open {
+    transform: translateX(260px);
+  }
+
+  .sidebar-overlay.active {
+    display: block;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .page-container {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    padding: 0 16px;
+  }
+
+  .search-shortcut {
+    display: none;
+  }
+
+  .user-role {
+    display: none;
+  }
+
+  .dashboard-hero-banner {
+    padding: 16px;
+  }
+
+  .hero-quote-card {
+    max-width: 100%;
+  }
+
+  .kpi-cards-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .study-chart-wrap {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .study-legend-list {
+    width: 100%;
+  }
+
+  .quick-actions-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .filter-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-search-box {
+    max-width: 100%;
+  }
+
+  .filter-group-left {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .modal-dialog {
+    margin: 12px;
+    max-height: 85vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .kpi-cards-row {
+    grid-template-columns: 1fr;
+  }
+
+  .finance-stats-row {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-actions-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .header-left {
+    max-width: 200px;
+  }
+}

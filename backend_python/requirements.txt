@@ -1,0 +1,36 @@
+# ApexMetrics Python Backend Stack
+# ===============================================
+
+# 1. FastAPI High-Throughput Async Gateway
+fastapi==0.115.0
+uvicorn[standard]==0.31.0
+pydantic==2.9.2
+websockets==13.1
+asyncpg==0.29.0
+httpx==0.27.2
+
+# 2. Flask Statistical Analytics Engine
+flask==3.0.3
+numpy==2.1.1
+scipy==1.14.1
+pandas==2.2.3
+
+# 3. Django Auth & Administrative Framework
+django==5.1.1
+django-environ==0.11.2
+django-cors-headers==4.4.0
+psycopg[binary]==3.2.1
+argon2-cffi==23.1.0
+
+# 4. Celery Distributed Task Queue & Redis Broker
+celery[redis]==5.4.0
+redis==5.1.0
+django-celery-results==2.5.1
+django-celery-beat==2.6.0
+flower==2.0.1
+
+# 5. Utilities & Testing
+pytest==8.3.3
+pytest-asyncio==0.24.0
+python-dotenv==1.0.1
+gunicorn==23.0.0

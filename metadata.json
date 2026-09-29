@@ -1,0 +1,6 @@
+{
+  "name": "LifeOS - Personal Productivity & Life Management System",
+  "description": "Professional personal productivity and life-management platform to organize your life and build your future: tasks, goals, habits, study, pomodoro, finances, notes, calendar, analytics, and AI assistant.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

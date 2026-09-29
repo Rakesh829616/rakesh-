@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register - LifeOS</title>
+  <meta name="description" content="Create your personal LifeOS workspace to organize tasks, goals, habits, and finances." />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/forms.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+
+  <style>
+    body {
+      background: radial-gradient(circle at 10% 20%, #0b1322 0%, #111e33 90%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      color: #1e293b;
+      font-family: 'Inter', -apple-system, sans-serif;
+    }
+
+    .auth-container {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .auth-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 36px 32px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25), 0 1px 3px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .brand-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      text-decoration: none;
+    }
+
+    .brand-leaf {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #10b981, #059669);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 20px;
+      font-weight: 800;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+    }
+
+    .brand-titles h1 {
+      font-size: 20px;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+    }
+
+    .brand-titles p {
+      font-size: 11px;
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    .auth-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #0f172a;
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+    }
+
+    .auth-subtitle {
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .password-wrap {
+      position: relative;
+    }
+
+    .toggle-pwd-btn {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      opacity: 0.6;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: #1e6bf2;
+      color: #ffffff;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(30, 107, 242, 0.3);
+      margin-top: 10px;
+    }
+
+    .btn-submit:hover {
+      background: #1557c0;
+      transform: translateY(-1px);
+    }
+
+    .auth-footer {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 13px;
+      color: #64748b;
+    }
+
+    .auth-footer a {
+      color: #1e6bf2;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .auth-footer a:hover {
+      text-decoration: underline;
+    }
+
+    .alert-error {
+      background-color: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #991b1b;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      margin-bottom: 16px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="auth-container">
+    <div class="auth-card">
+      <!-- Brand Logo -->
+      <a href="/" class="brand-header">
+        <div class="brand-leaf">🌱</div>
+        <div class="brand-titles">
+          <h1>LifeOS</h1>
+          <p>Organize your life. Build your future.</p>
+        </div>
+      </a>
+
+      <h2 class="auth-title">Create your account</h2>
+      <p class="auth-subtitle">Join LifeOS to manage your daily tasks, long-term goals, atomic habits, and finances in an isolated workspace.</p>
+
+      <div id="alreadyAuthNotice" style="display: none; background: #f0fdf4; border: 1px solid #bbf7d0; padding: 10px 14px; border-radius: 8px; margin-bottom: 18px; font-size: 13px; color: #166534; justify-content: space-between; align-items: center;">
+        <div>
+          <span>Currently active: <strong id="activeUserLabel"></strong></span>
+        </div>
+        <a href="/index.html" style="text-decoration: none; padding: 5px 12px; font-size: 12px; font-weight: 600; background: #16a34a; color: white; border-radius: 6px;">Workspace →</a>
+      </div>
+
+      <div id="authAlert" class="alert-error"></div>
+
+      <form id="registerForm">
+        <div class="form-group">
+          <label class="form-label" for="regName">Full Name <span class="required">*</span></label>
+          <input type="text" id="regName" class="form-control" placeholder="e.g. Alex Morgan" required autocomplete="name" />
+        </div>
+
+        <div class="form-row form-row-2">
+          <div class="form-group">
+            <label class="form-label" for="regEmail">Email Address <span class="required">*</span></label>
+            <input type="email" id="regEmail" class="form-control" placeholder="alex@example.com" required autocomplete="email" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="regRole">Role / Profession</label>
+            <input type="text" id="regRole" class="form-control" placeholder="e.g. Python Developer" value="Student" />
+          </div>
+        </div>
+
+        <div class="form-row form-row-2">
+          <div class="form-group">
+            <label class="form-label" for="regPassword">Password <span class="required">*</span></label>
+            <div class="password-wrap">
+              <input type="password" id="regPassword" class="form-control" placeholder="Min. 6 chars" required autocomplete="new-password" minlength="6" />
+              <button type="button" class="toggle-pwd-btn" onclick="togglePasswordVisibility('regPassword', this)">👁️</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="regConfirm">Confirm <span class="required">*</span></label>
+            <div class="password-wrap">
+              <input type="password" id="regConfirm" class="form-control" placeholder="Re-enter password" required autocomplete="new-password" minlength="6" />
+              <button type="button" class="toggle-pwd-btn" onclick="togglePasswordVisibility('regConfirm', this)">👁️</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="font-size: 12px; color: #64748b; margin-bottom: 14px;">
+          🔒 Your personal tasks, finances, and habits are completely isolated to your user account.
+        </div>
+
+        <button type="submit" class="btn-submit" id="submitBtn">
+          <span>Create Account</span>
+          <span>→</span>
+        </button>
+      </form>
+
+      <div class="auth-footer">
+        Already have an account? <a href="/login.html">Sign in</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    window.__VITE_API_BASE_URL__ = "%VITE_API_BASE_URL%";
+  </script>
+  <script src="/js/apiService.js"></script>
+
+  <script>
+    function togglePasswordVisibility(id, btn) {
+      const input = document.getElementById(id);
+      if (input.type === 'password') {
+        input.type = 'text';
+        btn.textContent = '👁️‍🗨️';
+      } else {
+        input.type = 'password';
+        btn.textContent = '👁️';
+      }
+    }
+
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('regName').value.trim();
+      const email = document.getElementById('regEmail').value.trim();
+      const role = document.getElementById('regRole').value.trim() || 'Member';
+      const password = document.getElementById('regPassword').value;
+      const confirm = document.getElementById('regConfirm').value;
+      const alertEl = document.getElementById('authAlert');
+      const submitBtn = document.getElementById('submitBtn');
+
+      alertEl.style.display = 'none';
+
+      if (!name || !email || !password) {
+        alertEl.textContent = 'Please fill out all required fields.';
+        alertEl.style.display = 'block';
+        return;
+      }
+
+      if (password !== confirm) {
+        alertEl.textContent = 'Passwords do not match.';
+        alertEl.style.display = 'block';
+        return;
+      }
+
+      if (password.length < 6) {
+        alertEl.textContent = 'Password must be at least 6 characters.';
+        alertEl.style.display = 'block';
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span>Creating your isolated workspace...</span>';
+
+      try {
+        const res = await window.apiService.auth.register(name, email, password, role);
+        submitBtn.innerHTML = '<span>✓ Registered! Redirecting...</span>';
+        setTimeout(() => {
+          window.location.href = '/index.html';
+        }, 400);
+      } catch (err) {
+        alertEl.textContent = err.message || 'Registration failed. Try again.';
+        alertEl.style.display = 'block';
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<span>Create Account</span><span>→</span>';
+      }
+    });
+
+    if (window.apiService && window.apiService.auth.isAuthenticated()) {
+      const currentUser = window.apiService.auth.getCurrentUser();
+      if (currentUser) {
+        const notice = document.getElementById('alreadyAuthNotice');
+        const label = document.getElementById('activeUserLabel');
+        if (notice && label) {
+          label.textContent = `${currentUser.name} (${currentUser.role || 'Member'})`;
+          notice.style.display = 'flex';
+        }
+      }
+    }
+  </script>
+</body>
+</html>
